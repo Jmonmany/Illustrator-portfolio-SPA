@@ -6,8 +6,8 @@ import { consoleDebug } from '../../tools/debug';
 import * as ac from '../../reducers/users/users.action.creator';
 import { UserCredential } from 'firebase/auth';
 import { currentUserReducer } from '../../reducers/users/current.reducer';
-import { db } from '../../config';
-import { ref, set } from '@firebase/database';
+// import { db } from '../../config';
+// import { ref, set } from '@firebase/database';
 
 export type useUsersType = {
     getAdmin: () => boolean;
@@ -44,16 +44,9 @@ export function useUsers(): useUsersType {
     const getAdmin = () => admin;
     const handleUser = async function (userCredentials: UserCredential) {
         const user = userCredentials.user;
-        const fullUser = new User(
-            user.displayName as string,
-            user.email as string,
-            await user.getIdToken(),
-            user.uid
-        );
-        if (fullUser.uid !== process.env.REACT_APP_FIREBASE_MARINA_UID) {
-            set(ref(db, 'users/' + user.uid), fullUser);
-        }
-        handleCurrentUser(fullUser);
+        // set(ref(db, 'users/' + user.uid), fullUser);
+        // handleCurrentUser(user)
+        handleAdmin(user.uid);
     };
 
     const handleAdmin = (uid: string) => {
@@ -79,8 +72,8 @@ export function useUsers(): useUsersType {
 
     const handleAddUser = async function (user: User) {
         try {
-            const fullUsers = await repo.create(user);
-            dispatchUsers(ac.usersAddCreator(fullUsers));
+            await repo.create(user);
+            dispatchUsers(ac.usersAddCreator(user));
         } catch (error) {
             handleError(error as Error);
         }

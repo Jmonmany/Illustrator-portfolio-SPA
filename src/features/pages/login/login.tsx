@@ -1,7 +1,7 @@
 import { useState, SyntheticEvent, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { loginWithGoogle, login } from '../../../config';
+import { login } from '../../../config';
 import { ArtworkContext } from '../../../core/context/artworks.context';
 import './login.scss';
 export default function Login() {
@@ -31,25 +31,9 @@ export default function Login() {
         });
     };
 
-    const handleLogin = async () => {
-        const userCredentials = await loginWithGoogle();
-        handleUser(userCredentials);
-        navigate('/contact');
-        Swal.fire({
-            title: 'Successfully logged in',
-            icon: 'success',
-            timer: 1200,
-            showConfirmButton: false,
-        });
-    };
-
     return (
         <>
             <section className="login">
-                <p>
-                    Before proceeding, please register quickly, it only takes
-                    one click!
-                </p>
                 <h2>Log in</h2>
                 <form onSubmit={handleSubmit}>
                     <div>
@@ -74,16 +58,8 @@ export default function Login() {
                     </div>
                     <div className="div__btn">
                         <button type="submit">Sign in</button>
-                        <span>or</span>
                     </div>
                 </form>
-                <button className="login__googleBtn" onClick={handleLogin}>
-                    <img
-                        src={require('../../../assets/google.png')}
-                        alt="google"
-                    />
-                    Sign in with Google
-                </button>
             </section>
         </>
     );

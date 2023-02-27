@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import { useContext } from 'react';
-import { loginWithGoogle } from '../../config';
 import { ARTWORK, ARTWORK2 } from '../../features/data/artmock';
 import { USER, USER2 } from '../../features/data/usermock';
 import { Artwork } from '../../features/models/artwork.model';
@@ -21,18 +20,6 @@ describe('Given the context AppContext', () => {
     let TestComponent: () => JSX.Element;
     describe('When a Test Component is wrapper with this context', () => {
         beforeEach(async () => {
-            (loginWithGoogle as jest.Mock).mockResolvedValue({
-                name: 'sample',
-                email: 'sample@gmail.com',
-                getIdToken: '12345',
-                user: {
-                    displayName: '',
-                    email: '',
-                    getIdToken: jest.fn(),
-                    uid: '',
-                },
-            });
-            const userCredentialsMock = await loginWithGoogle();
             const event = {
                 preventDefault: jest.fn(),
                 target: {
@@ -50,7 +37,6 @@ describe('Given the context AppContext', () => {
                     getAdmin,
                     handleAdmin,
                     handleCurrentUser,
-                    handleUser,
                     handleLoadUsers,
                     handleAddUser,
                     handleUpdateUser,
@@ -68,7 +54,6 @@ describe('Given the context AppContext', () => {
                 getAdmin();
                 handleAdmin(mockUser.uid);
                 handleCurrentUser(mockUser);
-                handleUser(userCredentialsMock);
                 handleLoadUsers();
                 handleAddUser(mockUser);
                 handleUpdateUser(mockUser);

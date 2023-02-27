@@ -1,5 +1,26 @@
 import { User } from '../models/user.model';
 
-export const USER = new User('mock1', 'https1', 'password1', 'uid1');
-export const USER2 = new User('mock2', 'https2', 'password2', 'uid2');
-export const USER3 = new User('mock3', 'https3', 'password3', 'uid3');
+export const USER = new User(
+    'name1',
+    'email1',
+    'phone1',
+    'address1',
+    'subject1',
+    'description1'
+);
+export const USER2 = new User(
+    'name2',
+    'email2',
+    'phone2',
+    'address2',
+    'subject2',
+    'description2'
+);
+export const USER3 = new User(
+    'name3',
+    'email3',
+    'phone3',
+    'address3',
+    'subject3',
+    'description3'
+);

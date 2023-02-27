@@ -8,7 +8,7 @@ export function usersReducer(
     switch (action.type) {
         case userActionTypes.load:
             return (action.payload as Array<User>).filter(
-                (user: User) => user.message.description !== ''
+                (user: User) => user.description !== ''
             );
         case userActionTypes.add:
             return [...state, action.payload as User];
