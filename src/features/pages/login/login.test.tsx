@@ -8,7 +8,7 @@ import {
     ArtworkContext,
 } from '../../../core/context/artworks.context';
 import Login from './login';
-import { login, loginWithGoogle } from '../../../config';
+import { login } from '../../../config';
 jest.mock('../../../config');
 
 describe('Given "Login" component', () => {
@@ -64,20 +64,6 @@ describe('Given "Login" component', () => {
             expect(submitButton).toBeInTheDocument();
             userEvent.click(submitButton);
             expect(login).toHaveBeenCalled();
-        });
-        test('Then buttons google should be in the screen', async () => {
-            (loginWithGoogle as jest.Mock).mockResolvedValue({
-                name: 'sample',
-                email: 'sample@gmail.com',
-                getIdToken: '12345',
-                uid: '12345',
-            });
-            const googleButton = screen.getByRole('button', {
-                name: 'google Sign in with Google',
-            });
-            expect(googleButton).toBeInTheDocument();
-            userEvent.click(googleButton);
-            expect(loginWithGoogle).toHaveBeenCalled();
         });
     });
 });

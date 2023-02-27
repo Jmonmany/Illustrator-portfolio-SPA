@@ -13,13 +13,13 @@ import { useEffect } from 'react';
 
 describe('Given "ArtistContact" component', () => {
     describe('When we have actually current user', () => {
-        const handleUpdateUser = jest.fn();
+        const handleAddUser = jest.fn();
         let mockContext: ArtworkContextStructure & UserContextStructure;
         beforeEach(async () => {
             mockContext = {
                 admin: false,
                 currentUser: USER,
-                handleUpdateUser,
+                handleAddUser,
             } as unknown as ArtworkContextStructure & UserContextStructure;
             await act(async () => {
                 render(
@@ -63,7 +63,7 @@ describe('Given "ArtistContact" component', () => {
             const submitButton = screen.getByRole('button', { name: 'Submit' });
             expect(submitButton).toBeInTheDocument();
             userEvent.click(submitButton);
-            expect(handleUpdateUser).toHaveBeenCalled();
+            expect(handleAddUser).toHaveBeenCalled();
         });
     });
 });

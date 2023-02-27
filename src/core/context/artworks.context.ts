@@ -5,7 +5,6 @@ import { Artwork } from '../../features/models/artwork.model';
 import { Artworks } from '../types/artwork';
 import { User } from '../../features/models/user.model';
 import { useUsersType } from '../../hooks/users/use.users';
-import { Users } from '../types/users';
 import { UserCredential } from 'firebase/auth';
 
 export type ArtworkContextStructure = Omit<
@@ -27,7 +26,7 @@ export const initialContext: ArtworkContextStructure & UserContextStructure = {
     users: [],
     currentUser: {},
     handleAdmin: (uid: string) => {},
-    handleAddUser: async (user: Users) => {},
+    handleAddUser: async (user: User) => {},
     handleLoadUsers: async () => {},
     handleUpdateUser: async (userPayload: Partial<User>) => {},
     getAdmin: () => false,

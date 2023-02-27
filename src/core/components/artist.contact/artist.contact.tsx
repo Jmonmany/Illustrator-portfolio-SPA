@@ -1,42 +1,33 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useState, SyntheticEvent, useContext, useEffect } from 'react';
-import { User } from '../../../features/models/user.model';
+import { useState, SyntheticEvent, useContext } from 'react';
 import { ArtworkContext } from '../../context/artworks.context';
 import { useNavigate } from 'react-router-dom';
 import './artist.contact.scss';
 import Swal from 'sweetalert2';
+import { User } from '../../../features/models/user.model';
 export function ArtistContact() {
-    const { currentUser, handleUpdateUser } = useContext(ArtworkContext);
+    const { handleAddUser } = useContext(ArtworkContext);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (Object.keys(currentUser).length === 0) {
-            navigate('/login');
-        }
-    }, [navigate, currentUser]);
-
-    const initialFormData: Partial<User> = {
-        message: {
-            address: '',
-            phone: '',
-            subject: '',
-            description: '',
-        },
+    const initialFormData = {
+        name: '',
+        email: '',
+        address: '',
+        phone: '',
+        subject: '',
+        description: '',
     };
 
     const [formData, setFormData] = useState(initialFormData);
 
     const handleInput = (ev: SyntheticEvent) => {
         const element = ev.target as HTMLFormElement;
-        setFormData({
-            ...formData,
-            message: { ...formData.message, [element.name]: element.value },
-        });
+        setFormData({ ...formData, [element.name]: element.value });
     };
 
     const handleSubmit = (ev: SyntheticEvent) => {
         ev.preventDefault();
-        handleUpdateUser({ ...currentUser, ...formData });
+        const user = new User(formData.name, formData.email,formData.address,formData.phone,formData.subject,formData.description )
+        handleAddUser(user)
         navigate('/work');
         Swal.fire({
             title: 'Thanks for submitting!',
@@ -68,7 +59,7 @@ export function ArtistContact() {
                         name="name"
                         id="name"
                         placeholder="Name"
-                        value={(currentUser as User).name}
+                        value={formData.name}
                         onInput={handleInput}
                         required
                     />
@@ -77,7 +68,7 @@ export function ArtistContact() {
                         name="email"
                         id="email"
                         placeholder="Email"
-                        value={(currentUser as User).email}
+                        value={formData.email}
                         onInput={handleInput}
                         required
                     />
@@ -88,7 +79,7 @@ export function ArtistContact() {
                         name="phone"
                         id="phone"
                         placeholder="Phone"
-                        value={formData.message?.phone}
+                        value={formData.phone}
                         onInput={handleInput}
                         required
                     />
@@ -97,7 +88,7 @@ export function ArtistContact() {
                         name="address"
                         id="address"
                         placeholder="Address"
-                        value={formData.message?.address}
+                        value={formData.address}
                         onInput={handleInput}
                         required
                     />
@@ -109,7 +100,7 @@ export function ArtistContact() {
                         name="subject"
                         id="subject"
                         placeholder="Subject"
-                        value={formData.message?.subject}
+                        value={formData.subject}
                         onInput={handleInput}
                         required
                     />
@@ -121,7 +112,7 @@ export function ArtistContact() {
                         name="description"
                         id="description"
                         placeholder="Type your message here..."
-                        value={formData.message?.description}
+                        value={formData.description}
                         onInput={handleInput}
                         required
                     />
