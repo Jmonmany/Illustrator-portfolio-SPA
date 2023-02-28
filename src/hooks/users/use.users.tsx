@@ -31,7 +31,7 @@ export function useUsers(): useUsersType {
     const initialUser: User | object = {};
     const initialStatus = 'Starting' as Status;
     const [users, dispatchUsers] = useReducer(usersReducer, initialState);
-    const [admin, setAdmin] = useState(false);
+    const [admin, setAdmin] = useState(true);
     const [status, setStatus] = useState(initialStatus);
     const [currentUser, dispatchCurrentUser] = useReducer(
         currentUserReducer,
@@ -89,7 +89,12 @@ export function useUsers(): useUsersType {
     };
 
     const handleDeleteCard = async function (uid: User['uid']) {
-        dispatchUsers(ac.usersDeleteCreator(uid));
+        try {
+            const finalId = await repo.delete(uid);
+            dispatchUsers(ac.usersDeleteCreator(finalId));
+        } catch (error) {
+            handleError(error as Error);
+        }
     };
 
     const handleError = (error: Error) => {

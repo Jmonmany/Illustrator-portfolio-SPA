@@ -7,7 +7,7 @@ const invalidIdError = new Error('Invalid ID');
 const firebaseCORS = '.json';
 export class UsersRepo {
     constructor(
-        private url = 'https://marina-labella-app-default-rtdb.europe-west1.firebasedatabase.app/admin/'
+        private url = 'https://marina-labella-app-default-rtdb.europe-west1.firebasedatabase.app/users/'
     ) {}
     async load(): Promise<User[]> {
         const resp = await fetch(this.url + firebaseCORS);
@@ -27,7 +27,7 @@ export class UsersRepo {
         // });
         // if (!resp.ok)
         //     throw new Error(`Error ${resp.status}: ${resp.statusText}`);
-        return payload
+        return payload;
     }
     async update(payload: Partial<User>): Promise<User> {
         if (!payload.uid) return Promise.reject(invalidIdError);
@@ -41,5 +41,14 @@ export class UsersRepo {
         if (!resp.ok)
             throw new Error(`Error ${resp.status}: ${resp.statusText}`);
         return await resp.json();
+    }
+    async delete(uid: User['uid']): Promise<User['uid']> {
+        if (!uid) return Promise.reject(invalidIdError);
+        const resp = await fetch(this.url + uid + firebaseCORS, {
+            method: 'DELETE',
+        });
+        if (!resp.ok)
+            throw new Error(`Error ${resp.status}: ${resp.statusText}`);
+        return uid;
     }
 }
