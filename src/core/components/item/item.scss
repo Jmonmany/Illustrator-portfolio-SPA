@@ -2,29 +2,32 @@
 @import '../../../mixins.scss';
 
 .item {
-    padding: 0.25rem;
-    display: flex;
+    // padding: 0.5rem;
     overflow: hidden;
-    &__artwork {
-        width: 400px;
-        height: 500px;
-    }
+    display: inline-block;
     div {
-        margin-block: 0.5rem;
-        width: 25rem;
-        display: flex;
-        justify-content: space-between;
-        position: absolute;
-        button {
-            @include btnTheme();
-            background-color: transparent;
-            padding-inline: 1rem;
-        }
-        input {
-            display: none;
-        }
+        // max-width: 500px;
+        // height: auto;
         img {
-            height: 2rem;
+            max-width: 100%;
+            // height: auto;
+        }
+        div {
+            margin-block: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            
+            button {
+                @include btnTheme();
+                background-color: transparent;
+                padding-inline: 1rem;
+            }
+            input {
+                display: none;
+            }
+            img {
+                height: 2rem;
+            }
         }
     }
 }
