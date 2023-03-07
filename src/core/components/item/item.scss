@@ -2,21 +2,23 @@
 @import '../../../mixins.scss';
 
 .item {
-    // padding: 0.5rem;
+    margin-block: 0.4rem;
     overflow: hidden;
     display: inline-block;
     div {
-        // max-width: 500px;
-        // height: auto;
+        display: flex;
         img {
             max-width: 100%;
-            // height: auto;
+            height: auto;
         }
         div {
+            max-width: 100%;
             margin-block: 0.5rem;
+            min-width: 27.5%;
             display: flex;
             justify-content: space-between;
-            
+            position: absolute;
+            // translate: 0px -26rem;
             button {
                 @include btnTheme();
                 background-color: transparent;
