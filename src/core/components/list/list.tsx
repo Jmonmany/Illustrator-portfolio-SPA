@@ -42,7 +42,7 @@ export function List() {
         );
         (dragItem.current as unknown as null) = null;
         (dragOverItem.current as unknown as null) = null;
-        set(ref(db, 'artworks/'), copyListItems);
+        set(ref(db, 'admin/artworks/'), copyListItems);
         reShuffleArtworks(copyListItems);
     };
     return (
