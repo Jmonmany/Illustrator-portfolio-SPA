@@ -18,15 +18,6 @@ export class UsersRepo {
     }
     async create(payload: User): Promise<User> {
         set(ref(db, 'users/' + payload.uid), payload);
-        // const resp = await fetch(this.url + firebaseCORS, {
-        //     method: 'POST',
-        //     body: JSON.stringify(payload),
-        //     headers: {
-        //         'Content-type': 'application/json',
-        //     },
-        // });
-        // if (!resp.ok)
-        //     throw new Error(`Error ${resp.status}: ${resp.statusText}`);
         return payload;
     }
     async update(payload: Partial<User>): Promise<User> {

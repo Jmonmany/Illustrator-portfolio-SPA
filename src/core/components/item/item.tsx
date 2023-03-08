@@ -50,10 +50,10 @@ export function Item({
     return (
         <li
             className="item"
-            draggable
-            onDragStart={dragStart}
-            onDragEnter={dragEnter}
-            onDragEnd={dragEnd}
+            draggable={getAdmin() ? true : false}
+            onDragStart={getAdmin() ? dragStart : undefined}
+            onDragEnter={getAdmin() ? dragEnter : undefined}
+            onDragEnd={getAdmin() ? dragEnd : undefined}
         >
             <div>
                 <img

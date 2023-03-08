@@ -7,19 +7,43 @@
     justify-content: space-between;
     align-items: center;
     border-top: 1px solid black;
-    width: 100%;
+    width: 80%;
     a {
         @include linkDeco();
+        font-size: 1.2rem;
+        font-weight: 600;
     }
     .page-list {
         @include unstyledList();
+        margin-inline-end: 5.5rem;
         li {
             margin: 1rem;
+        }
+    }
+    span {
+        a {
+            font-weight: 500;
+            font-size: 1.1rem;
         }
     }
 }
 .ham {
     display: none;
+}
+@media (max-width: 1010px) {
+    .menu {
+        a {
+            @include linkDeco();
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .page-list {
+            @include unstyledList();
+            li {
+                margin: 0.2rem;
+            }
+        }
+    }
 }
 @media (max-width: 650px) {
     .menu {

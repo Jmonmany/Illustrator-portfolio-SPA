@@ -16,21 +16,18 @@ export type ArtworkContextStructure = Omit<
 
 export type UserContextStructure = Omit<
     useUsersType,
-    'getStatus' | 'getUsers' | 'getCurrentUser'
+    'getStatus' | 'getUsers' 
 > & {
     users: Array<User>
-    currentUser: User | object
 };
 
 export const initialContext: ArtworkContextStructure & UserContextStructure = {
     users: [],
-    currentUser: {},
     handleAdmin: (uid: string) => {},
     handleAddUser: async (user: User) => {},
     handleLoadUsers: async () => {},
     handleUpdateUser: async (userPayload: Partial<User>) => {},
     getAdmin: () => false,
-    handleCurrentUser: () => {},
     handleUser: async (userCredentials: UserCredential) => {},
     handleDeleteCard: async (uid: string) => {},
     artworkDetailed: {},

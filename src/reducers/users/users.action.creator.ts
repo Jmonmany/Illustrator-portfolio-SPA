@@ -21,11 +21,6 @@ export const usersUpdateCreator = (payload: User): usersAction => ({
     payload,
 });
 
-export const setCurrentUser = (payload: User): usersAction => ({
-    type: userActionTypes.setCurrent,
-    payload,
-});
-
 export const usersDeleteCreator = (
     payload: User['uid']
 ): usersAction => ({

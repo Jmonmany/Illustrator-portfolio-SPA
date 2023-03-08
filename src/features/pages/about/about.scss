@@ -2,22 +2,31 @@
 @import '../../../mixins.scss';
 
 .about {
-    margin-block: 2rem;
+    margin-block: 4rem;
+    align-self: center;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    *{
+        font-size: 1.1rem;
+    }
     a {
         color: blue;
         text-decoration: none;
     }
     article {
+        margin-inline: 2rem;
         h3 {
             margin: 0;
         }
         width: 40%;
     }
-    img {
-        max-width: 450px;
+    div {
+        margin-inline: 2rem;
+        img {
+            max-width: 500px;
+        }
     }
+
     ul {
         @include unstyledList();
         flex-direction: column;

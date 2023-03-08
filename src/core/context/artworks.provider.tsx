@@ -20,11 +20,9 @@ export function ArtworkContextProvider({
         handleFile,
     } = useArtworks();
     const {
-        getCurrentUser,
         handleAdmin,
         getAdmin,
         getUsers,
-        handleCurrentUser,
         handleUser,
         handleLoadUsers,
         handleAddUser,
@@ -34,10 +32,8 @@ export function ArtworkContextProvider({
     const context = useMemo(
         () => ({
             users: getUsers(),
-            currentUser: getCurrentUser(),
             getAdmin,
             handleAdmin,
-            handleCurrentUser,
             handleUser,
             handleLoadUsers,
             handleAddUser,
@@ -54,11 +50,9 @@ export function ArtworkContextProvider({
             handleUpdate,
         }),
         [
-            getCurrentUser,
             handleAdmin,
             getUsers,
             getAdmin,
-            handleCurrentUser,
             handleUser,
             handleLoadUsers,
             handleAddUser,
