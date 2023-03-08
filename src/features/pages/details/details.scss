@@ -2,19 +2,28 @@
 @import '../../../mixins.scss';
 
 .details {
-    margin-block-start: 2rem;
+    margin-block-start: 3.5rem;
     display: flex;
-    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column-reverse;
+    justify-content: center;
     img {
-        max-width: 600px;
-        max-height: 700px;
+        max-width: 1000px;
+        max-height: 1200px;
+        margin-block: 2rem;
     }
     section {
-        margin-block-start: 5rem;
+        width: 50%;
         display: flex;
+        justify-content: center;
+        align-items: center;
         flex-direction: column;
         * {
-            margin-block: 1rem;
+            margin-block: 0.3rem;
+            font-size: 1.2rem;
+        }
+        h2 {
+            font-size: 1.5rem;
         }
     }
     a {

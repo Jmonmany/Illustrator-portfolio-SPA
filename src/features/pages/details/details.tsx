@@ -95,7 +95,7 @@ export default function Details() {
                         className="item__artwork"
                     />
                     <section>
-                        <h3>{(artworkDetailed as Artwork).title}</h3>
+                        <h2>{(artworkDetailed as Artwork).title}</h2>
                         <p>{(artworkDetailed as Artwork).description}</p>
                         <label>
                             {(artworkDetailed as Artwork).linkTag}

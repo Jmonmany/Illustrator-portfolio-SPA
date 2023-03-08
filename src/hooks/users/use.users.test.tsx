@@ -14,6 +14,7 @@ import { UsersRepo } from '../../core/services/user-repo/user.repo';
 import * as users from './use.users';
 import { User } from '../../features/models/user.model';
 import * as debug from '../../tools/debug';
+import { login } from '../../config';
 jest.mock('@firebase/database');
 jest.mock('../../config');
 jest.mock('../../core/services/art-repo/art.repo.ts');
@@ -28,11 +29,23 @@ describe(`Given useUsers (custom hook)
     let buttons: Array<HTMLElement>;
     beforeEach(async () => {
         spyConsole = jest.spyOn(debug, 'consoleDebug');
-
+        (login as jest.Mock).mockResolvedValue({
+            name: 'sample',
+            email: 'sample@gmail.com',
+            getIdToken: '12345',
+            user: {
+                displayName: '',
+                email: '',
+                getIdToken: jest.fn(),
+                uid: process.env.REACT_APP_FIREBASE_MARINA_UID,
+            },
+        });
+        const userCredentialsMock = login('sample', 'sample@gmail.com');
         TestComponent = () => {
             const {
                 getAdmin,
                 getStatus,
+                handleUser,
                 getUsers,
                 handleLoadUsers,
                 handleAddUser,
@@ -49,6 +62,13 @@ describe(`Given useUsers (custom hook)
                         Update
                     </button>
                     <button onClick={() => handleDeleteCard(mockUser2.uid)}>
+                        DeleteCard
+                    </button>
+                    <button
+                        onClick={async () =>
+                            handleUser(await userCredentialsMock)
+                        }
+                    >
                         DeleteCard
                     </button>
                     <h1>{getAdmin() ? 'true' : 'false'}</h1>
@@ -107,13 +127,13 @@ describe(`Given useUsers (custom hook)
             userEvent.click(buttons[3]);
             expect(await screen.findByText(mockUser2.name)).toBeInTheDocument();
         });
-        // test('Then its function handleUser ADMIN should be used', async () => {
-        //     userEvent.click(buttons[4]);
-        //     const admin = await screen.findByRole('heading', {
-        //         name: 'true',
-        //     });
-        //     expect(admin).toBeInTheDocument();
-        // });
+        test('Then its function handleUser ADMIN should be used', async () => {
+            userEvent.click(buttons[4]);
+            const admin = await screen.findByRole('heading', {
+                name: 'true',
+            });
+            expect(admin).toBeInTheDocument();
+        });
     });
     describe(`When the repo is NOT working OK`, () => {
         beforeEach(mockNoValidRepoResponse);

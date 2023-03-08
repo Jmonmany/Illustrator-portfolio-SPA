@@ -58,7 +58,7 @@ describe('Given "Contact" component', () => {
         });
         test('Then the component ClientContact should be rendered', () => {
             const title = screen.getByRole('heading', {
-                name: 'Manage who contacts you',
+                name: 'Received Messages',
             });
             expect(title).toBeInTheDocument();
         });

@@ -2,6 +2,7 @@
 @import '../../../mixins.scss';
 
 .login {
+    margin-block-start: 5rem;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -9,6 +10,7 @@
     h2 {
         @include btnTheme();
         cursor: default;
+        font-size: 1.6rem;
         font-weight: 400;
     }
     form {
@@ -28,6 +30,7 @@
         }
         button {
             cursor: pointer;
+            margin-block: 1rem;
             align-self: center;
             width: 6rem;
             color: white;
@@ -40,7 +43,7 @@
         }
     }
     input {
-        margin-block: 2rem;
+        margin-block: 1rem;
         border: none;
         border-bottom: solid 1px grey;
         padding-block: 1rem;

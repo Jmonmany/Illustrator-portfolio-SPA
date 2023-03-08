@@ -6,8 +6,6 @@ import { consoleDebug } from '../../tools/debug';
 import * as ac from '../../reducers/users/users.action.creator';
 import { UserCredential } from 'firebase/auth';
 import { currentUserReducer } from '../../reducers/users/current.reducer';
-// import { db } from '../../config';
-// import { ref, set } from '@firebase/database';
 
 export type useUsersType = {
     getAdmin: () => boolean;
@@ -31,7 +29,7 @@ export function useUsers(): useUsersType {
     const initialUser: User | object = {};
     const initialStatus = 'Starting' as Status;
     const [users, dispatchUsers] = useReducer(usersReducer, initialState);
-    const [admin, setAdmin] = useState(true);
+    const [admin, setAdmin] = useState(false);
     const [status, setStatus] = useState(initialStatus);
     const [currentUser, dispatchCurrentUser] = useReducer(
         currentUserReducer,
@@ -44,8 +42,7 @@ export function useUsers(): useUsersType {
     const getAdmin = () => admin;
     const handleUser = async function (userCredentials: UserCredential) {
         const user = userCredentials.user;
-        // set(ref(db, 'users/' + user.uid), fullUser);
-        // handleCurrentUser(user)
+
         handleAdmin(user.uid);
     };
 

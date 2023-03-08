@@ -12,7 +12,7 @@ export function ClientContact() {
 
     return (
         <>
-            <h3>Manage who contacts you</h3>
+            <h3>Received Messages</h3>
             <div className="client-contact">
                 <ul>
                     {users.map((item: User) => {

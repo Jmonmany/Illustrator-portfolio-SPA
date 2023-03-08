@@ -2,9 +2,14 @@
 @import '../../../mixins.scss';
 
 .artist-contact {
+    margin-block: 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    h2 {
+        font-size: 2rem;
+        margin: 0;
+    }
     a {
         text-decoration: none;
     }
@@ -19,7 +24,7 @@
             margin-block: 1rem;
         } 
         input {
-            margin: 1rem;
+            margin: 0.5rem;
             border: none;
             border-bottom: solid 1px;
             padding-block: 0.5rem;

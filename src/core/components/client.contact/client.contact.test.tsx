@@ -27,7 +27,7 @@ describe('Given "ClientContact" component', () => {
     describe('When component is call with a DOM implementation', () => {
         test(`Then it should be render with its title`, () => {
             const addTitle = screen.getByRole('heading', {
-                name: 'Manage who contacts you',
+                name: 'Received Messages',
             });
             const nameLabel = screen.getByText(USER.name);
             const emailLabel = screen.getByText(USER.email);

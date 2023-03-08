@@ -39,18 +39,16 @@ export function ArtistContact() {
 
     return (
         <div className="artist-contact">
-            <h3>Let's talk</h3>
+            <h2>Let's talk</h2>
             <p>
                 For work inquiries, commissions or just to say hi, please
-                contact me at:{' '}
+                contact me at{' '}
                 <span>
                     <a href="mailto:marinaf.labella@gmail.com">
                         marinaf.labella@gmail.com
                     </a>
                 </span>{' '}
-                <br />
-                <br />
-                or just use the form and I will get back to you.
+                or use the form and I will reach you.
             </p>
             <form onSubmit={handleSubmit}>
                 <div>
