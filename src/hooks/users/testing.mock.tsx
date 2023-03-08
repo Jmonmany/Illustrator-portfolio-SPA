@@ -23,4 +23,5 @@ export const mockNoValidRepoResponse = () => {
     (UsersRepo.prototype.load as jest.Mock).mockRejectedValue(error);
     (UsersRepo.prototype.create as jest.Mock).mockRejectedValue(error);
     (UsersRepo.prototype.update as jest.Mock).mockRejectedValue(error);
+    (UsersRepo.prototype.delete as jest.Mock).mockRejectedValue(error);
 };

@@ -22,6 +22,7 @@ jest.mock('../../core/services/art-repo/art.repo.ts');
 UsersRepo.prototype.load = jest.fn();
 UsersRepo.prototype.create = jest.fn();
 UsersRepo.prototype.update = jest.fn();
+UsersRepo.prototype.delete = jest.fn();
 describe(`Given useUsers (custom hook)
             render with a virtual component`, () => {
     let TestComponent: () => JSX.Element;
@@ -107,9 +108,6 @@ describe(`Given useUsers (custom hook)
             userEvent.click(buttons[0]);
             userEvent.click(buttons[1]);
             expect(UsersRepo.prototype.create).toHaveBeenCalled();
-            // expect(
-            //     await screen.findByText(mockAddUser.name)
-            // ).toBeInTheDocument();
         });
 
         test('Then its function handleUpdateUser should be used', async () => {
@@ -154,6 +152,13 @@ describe(`Given useUsers (custom hook)
         test('Then its function handleUpdateUser should be used', async () => {
             userEvent.click(buttons[2]);
             expect(UsersRepo.prototype.update).toHaveBeenCalled();
+            await waitFor(() => {
+                expect(spyConsole).toHaveBeenLastCalledWith('Testing errors');
+            });
+        });
+        test('Then its function handleDeleteCard should be used', async () => {
+            userEvent.click(buttons[3]);
+            expect(UsersRepo.prototype.delete).toHaveBeenCalled();
             await waitFor(() => {
                 expect(spyConsole).toHaveBeenLastCalledWith('Testing errors');
             });
