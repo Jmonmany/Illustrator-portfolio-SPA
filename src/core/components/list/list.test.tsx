@@ -1,5 +1,5 @@
 /* eslint-disable testing-library/no-unnecessary-act */
-import { render, screen, act, fireEvent } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router';
 import { List } from './list';
 import {
@@ -7,12 +7,7 @@ import {
     ArtworkContextStructure,
     UserContextStructure,
 } from '../../context/artworks.context';
-import {
-    ARTWORK,
-    ARTWORK2,
-    ARTWORK3,
-    ARTWORKS,
-} from '../../../features/data/artmock';
+import { ARTWORKS } from '../../../features/data/artmock';
 import userEvent from '@testing-library/user-event';
 describe('Given "List" component', () => {
     const handleLoad = jest.fn();

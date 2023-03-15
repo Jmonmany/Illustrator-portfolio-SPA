@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Repository } from '../../types/repo';
 import { Artwork } from '../../../features/models/artwork.model';
 const invalidIdError = new Error('Invalid ID');
