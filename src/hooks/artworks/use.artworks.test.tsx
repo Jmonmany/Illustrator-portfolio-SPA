@@ -3,7 +3,6 @@
 import { render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
-    mockArtworks,
     mockArtwork1,
     mockArtwork2,
     mockAddArtwork,
@@ -16,8 +15,6 @@ import { ArtworksRepo } from '../../core/services/art-repo/art.repo';
 import { useArtworks } from './use.artworks';
 import { Artwork } from '../../features/models/artwork.model';
 import * as debug from '../../tools/debug';
-import { ARTWORKS } from '../../features/data/artmock';
-import { useEffect } from 'react';
 
 jest.mock('firebase/storage');
 jest.mock('../../config');

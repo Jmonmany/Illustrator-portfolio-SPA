@@ -1,8 +1,4 @@
-import {
-    mockArtwork1,
-    mockArtwork2,
-    mockArtworks,
-} from '../../hooks/artworks/testing.mock';
+import { mockArtwork1, mockArtwork2 } from '../../hooks/artworks/testing.mock';
 import { Artwork } from '../../features/models/artwork.model';
 import { artworksAction } from './artworks.action.creator';
 import * as ac from './artworks.action.creator';
@@ -49,11 +45,7 @@ describe('Given the reducer', () => {
             state = ARTWORKS;
             action = ac.artworksUpdateCreator(updateartwork);
             const result = artworksReducer(state, action);
-            expect(result).toEqual([
-                [updateartwork],
-                [ARTWORK2],
-                [ARTWORK3],
-            ]);
+            expect(result).toEqual([[updateartwork], [ARTWORK2], [ARTWORK3]]);
         });
     });
 
@@ -62,16 +54,16 @@ describe('Given the reducer', () => {
             state = ARTWORKS;
             action = ac.artworksDeleteCreator(ARTWORK.id);
             const result = artworksReducer(state, action);
-            expect(result).toEqual([[],[ARTWORK2],[ARTWORK3]]);
+            expect(result).toEqual([[], [ARTWORK2], [ARTWORK3]]);
         });
     });
 
     describe('When the action type is "artworks@reshuffle"', () => {
         test('Then it should return as state the loaded data', () => {
             state = [];
-            action = ac.artworksReShuffleCreator(mockArtworks);
+            action = ac.artworksReShuffleCreator([mockArtwork1, mockArtwork2]);
             const result = artworksReducer(state, action);
-            expect(result).toEqual(mockArtworks);
+            expect(result).toEqual([mockArtwork1, mockArtwork2]);
         });
     });
 

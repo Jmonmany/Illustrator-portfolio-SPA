@@ -1,12 +1,12 @@
-import { set, ref } from 'firebase/database';
+// import { set, ref } from 'firebase/database';
 import { SyntheticEvent, useContext, useEffect, useRef } from 'react';
-import { db } from '../../../config';
+// import { db } from '../../../config';
 import { Artwork } from '../../../features/models/artwork.model';
 import { ArtworkContext } from '../../context/artworks.context';
 import { Item } from '../item/item';
 import './list.scss';
 export function List() {
-    const { artworks, handleLoad, handleAdd, reShuffleArtworks, getAdmin } =
+    const { artworks, handleLoad, handleAdd, getAdmin } =
         useContext(ArtworkContext);
     useEffect(() => {
         handleLoad();
