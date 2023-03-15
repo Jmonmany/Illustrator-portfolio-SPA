@@ -3,11 +3,11 @@ import { artworkActionTypes } from '../../reducers/artworks/artworks.action.type
 
 export type artworksAction = {
     type: string;
-    payload: Array<Artwork> | Artwork | Artwork['id'];
+    payload: Array<Artwork> | Artwork | Artwork['id'] | Array<Array<Artwork>>;
 };
 
 export const artworksLoadCreator = (
-    payload: Array<Artwork>
+    payload: Array<Array<Artwork>>
 ): artworksAction => ({
     type: artworkActionTypes.load,
     payload,

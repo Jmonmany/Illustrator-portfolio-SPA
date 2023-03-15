@@ -16,6 +16,8 @@ import { ArtworksRepo } from '../../core/services/art-repo/art.repo';
 import { useArtworks } from './use.artworks';
 import { Artwork } from '../../features/models/artwork.model';
 import * as debug from '../../tools/debug';
+import { ARTWORKS } from '../../features/data/artmock';
+import { useEffect } from 'react';
 
 jest.mock('firebase/storage');
 jest.mock('../../config');
@@ -52,6 +54,7 @@ describe(`Given useArtworkss (custom hook)
                 handleUpdate,
                 handleDelete,
             } = useArtworks();
+
             return (
                 <>
                     <button onClick={handleLoad}>Load</button>
@@ -61,16 +64,28 @@ describe(`Given useArtworkss (custom hook)
                     <button onClick={() => handleUpdate(mockUpdateArtwork)}>
                         Update
                     </button>
-                    <button onClick={() => handleDelete(mockArtwork2.id)}>
+                    <button onClick={() => handleDelete(mockArtwork2)}>
                         Delete
                     </button>
-                    <button onClick={() => reShuffleArtworks(mockArtworks)}>
+                    <button
+                        onClick={() =>
+                            reShuffleArtworks([mockArtwork1, mockArtwork2])
+                        }
+                    >
                         reShuffle
                     </button>
                     <button onClick={() => handleDetailed(mockArtwork1)}>
                         Detail
                     </button>
-                    <button onClick={() => handleFile(event, mockArtwork2.id)}>
+                    <button
+                        onClick={() =>
+                            handleFile(
+                                event,
+                                mockArtwork2.id,
+                                mockArtwork2.column
+                            )
+                        }
+                    >
                         File
                     </button>
                     {getStatus() !== 'Loaded' ? (
@@ -79,7 +94,17 @@ describe(`Given useArtworkss (custom hook)
                         <div>
                             <p>Loaded</p>
                             <ul>
-                                {getArtworks().map((artwork: Artwork) => (
+                                {getArtworks()[0].map((artwork: Artwork) => (
+                                    <li key={artwork.id}>{artwork.title}</li>
+                                ))}
+                            </ul>
+                            <ul>
+                                {getArtworks()[1].map((artwork: Artwork) => (
+                                    <li key={artwork.id}>{artwork.title}</li>
+                                ))}
+                            </ul>
+                            <ul>
+                                {getArtworks()[2].map((artwork: Artwork) => (
                                     <li key={artwork.id}>{artwork.title}</li>
                                 ))}
                             </ul>
@@ -100,9 +125,8 @@ describe(`Given useArtworkss (custom hook)
             userEvent.click(buttons[0]);
             userEvent.click(buttons[1]);
             expect(ArtworksRepo.prototype.create).toHaveBeenCalled();
-            expect(
-                await screen.findByText(mockAddArtwork.title)
-            ).toBeInTheDocument();
+            const result = await screen.findAllByText(mockAddArtwork.title);
+            expect(result[1]).toBeInTheDocument();
         });
 
         test('Then its function handleLoad should be add places to the state', async () => {
@@ -116,7 +140,6 @@ describe(`Given useArtworkss (custom hook)
                 await screen.findByText(mockArtwork2.title)
             ).toBeInTheDocument();
         });
-
 
         test('Then its function handleUpdate should be used', async () => {
             userEvent.click(buttons[0]);
@@ -207,14 +230,19 @@ describe(`Given useArtworkss`, () => {
             target: {},
         };
         TestComponent = () => {
-            const {
-                handleFile,
-                handleLoad,
-            } = useArtworks();
+            const { handleFile, handleLoad } = useArtworks();
             return (
                 <>
                     <button onClick={handleLoad}>Load</button>
-                    <button onClick={() => handleFile(event, mockArtwork2.id)}>
+                    <button
+                        onClick={() =>
+                            handleFile(
+                                event,
+                                mockArtwork2.id,
+                                mockArtwork2.column
+                            )
+                        }
+                    >
                         File
                     </button>
                 </>

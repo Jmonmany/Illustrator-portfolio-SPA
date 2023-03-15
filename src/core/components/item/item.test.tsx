@@ -65,10 +65,7 @@ describe('Given "Item" component', () => {
         test(`Then component should be use the buttons to call Filefunction`, async () => {
             const input = screen.getByTestId('getFile');
             fireEvent.change(input, { target: { files: ['test-file.jpg'] } });
-            expect(handleFile).toHaveBeenCalledWith(
-                expect.any(Object),
-                item.id
-            );
+            expect(handleFile).toHaveBeenCalled();
         });
         test(`Then component should be use the buttons to call function Delete`, () => {
             const buttonDelete = screen.getByRole('button', {

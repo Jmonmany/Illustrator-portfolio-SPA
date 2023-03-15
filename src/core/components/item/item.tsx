@@ -29,11 +29,11 @@ export function Item({
     };
 
     const handleClickDelete = () => {
-        handleDelete(item.id);
+        handleDelete(item);
     };
 
     const handleClickFile = (ev: SyntheticEvent) => {
-        handleFile(ev, item.id);
+        handleFile(ev, item.id, item.column);
     };
 
     const inputRef = useRef<HTMLInputElement>(null);

@@ -19,13 +19,13 @@ export type useArtworksType = {
     artworkDetailed: Artwork | object;
     handleDetailed: (artwork: Artwork) => void;
     reShuffleArtworks: (list: Array<Artwork>) => void;
-    handleFile: (ev: any, id: string) => void;
+    handleFile: (ev: any, id: string, column: string) => void;
     getStatus: () => Status;
-    getArtworks: () => Array<Artwork>;
+    getArtworks: () => Array<Array<Artwork>>;
     handleLoad: () => Promise<void>;
     handleAdd: (artworks: Artwork) => Promise<void>;
     handleUpdate: (artworksPayload: Partial<Artwork>) => Promise<void>;
-    handleDelete: (id: Artwork['id']) => Promise<void>;
+    handleDelete: (Artwork: Artwork) => Promise<void>;
 };
 
 type Status = 'Starting' | 'Loading' | 'Loaded';
@@ -33,7 +33,7 @@ type Status = 'Starting' | 'Loading' | 'Loaded';
 export function useArtworks(): useArtworksType {
     const repo = useMemo(() => new ArtworksRepo(), []);
     const initialDetailed: Artwork | object = {};
-    const initialState: Array<Artwork> = [];
+    const initialState: Array<Array<Artwork>> = [[], [], []];
     const initialStatus = 'Starting' as Status;
     const [artworks, artworksDispatcher] = useReducer(
         artworksReducer,
@@ -46,7 +46,8 @@ export function useArtworks(): useArtworksType {
     const [status, setStatus] = useState(initialStatus);
     const getArtworks = () => artworks;
     const getStatus = () => status;
-    const handleFile = async (ev: SyntheticEvent, id: string) => {
+    const handleFile = async (ev: SyntheticEvent, id: string, column: string) => {
+        console.log('MIERDA')
         ev.preventDefault();
         const element = ev.target as HTMLInputElement;
         if (!element.files) {
@@ -57,7 +58,7 @@ export function useArtworks(): useArtworksType {
         const artworkRef = ref(storage, input.name);
         await uploadBytes(artworkRef, input);
         const url = await getDownloadURL(artworkRef);
-        const artworkData = new Artwork(input.name, url);
+        const artworkData = new Artwork(input.name, url, column);
         artworkData.id = id;
         handleUpdate(artworkData);
     };
@@ -81,18 +82,16 @@ export function useArtworks(): useArtworksType {
         }
     }, [repo]);
 
-    const handleAdd = async function (artworks: Artwork) {
+    const handleAdd = async function (artwork: Artwork) {
         try {
-            const fullArtworks = await repo.create(artworks);
+            const fullArtworks = await repo.create(artwork);
             artworksDispatcher(ac.artworksAddCreator(fullArtworks));
         } catch (error) {
             handleError(error as Error);
         }
     };
 
-    const handleUpdate = async function (
-        artworksPayload: Partial<Artwork>
-    ) {
+    const handleUpdate = async function (artworksPayload: Partial<Artwork>) {
         try {
             const fullArtworks = await repo.update(artworksPayload);
             artworksDispatcher(ac.artworksUpdateCreator(fullArtworks));
@@ -101,9 +100,9 @@ export function useArtworks(): useArtworksType {
         }
     };
 
-    const handleDelete = async function (id: Artwork['id']) {
+    const handleDelete = async function (item: Artwork) {
         try {
-            const finalId = await repo.delete(id);
+            const finalId = await repo.delete(item);
             artworksDispatcher(ac.artworksDeleteCreator(finalId));
         } catch (error) {
             handleError(error as Error);

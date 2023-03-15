@@ -4,7 +4,7 @@ export class Artwork implements Artworks {
     description: string;
     linkTag: string;
     link: string;
-    constructor(public title: string, public url: string) {
+    constructor(public title: string, public url: string, public column: string) {
         this.id = '';
         this.description = '';
         this.linkTag = '';
