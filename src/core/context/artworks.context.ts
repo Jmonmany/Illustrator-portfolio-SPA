@@ -11,7 +11,7 @@ export type ArtworkContextStructure = Omit<
     useArtworksType,
     'getStatus' | 'getArtworks'
 > & {
-    artworks: Array<Artwork>;
+    artworks: Array<Array<Artwork>>;
 };
 
 export type UserContextStructure = Omit<
@@ -37,7 +37,7 @@ export const initialContext: ArtworkContextStructure & UserContextStructure = {
     handleFile: async () => {},
     handleLoad: async () => {},
     handleAdd: async (artworks: Artworks) => {},
-    handleDelete: async (id: string) => {},
+    handleDelete: async (item: Artworks) => {},
     handleUpdate: async (artworksPayload: Partial<Artwork>) => {},
 };
 

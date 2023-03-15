@@ -1,19 +1,30 @@
 @import '../../../variables';
 @import '../../../mixins.scss';
+
 .list {
     margin-block: 2rem;
     margin-inline: 3rem;
-    ul {
-        padding: 0;
-        margin: 0;
-        -webkit-column-count: 3;
-        -moz-column-count: 3;
-        column-count: 3;
-        -webkit-column-width: 33%;
-        -moz-column-width: 33%;
-        column-width: 33%;
-        list-style: none;
+    .row {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: center;
+        .column {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            margin: 1rem;
+            ul {
+                padding: 0;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
     }
+
     button {
         @include btnTheme();
         background-color: transparent;

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { useContext } from 'react';
-import { ARTWORK, ARTWORK2 } from '../../features/data/artmock';
+import { ARTWORK, ARTWORK2, ARTWORKS } from '../../features/data/artmock';
 import { USER } from '../../features/data/usermock';
 import { Artwork } from '../../features/models/artwork.model';
 import { User } from '../../features/models/user.model';
@@ -10,7 +10,7 @@ jest.mock('../../config');
 const mockArtwork: Artwork = ARTWORK;
 const mockUser: User = USER;
 const mockDetailedArtwork: Artwork = ARTWORK2;
-initialContext.artworks = [mockArtwork];
+initialContext.artworks = ARTWORKS;
 initialContext.users = [mockUser];
 initialContext.artworkDetailed = mockDetailedArtwork;
 
@@ -55,15 +55,15 @@ describe('Given the context AppContext', () => {
                 handleDeleteCard(mockUser.uid);
                 handleDetailed(mockArtwork);
                 reShuffleArtworks([mockArtwork]);
-                handleFile(event, ARTWORK.id);
+                handleFile(event, ARTWORK.id, ARTWORK.column);
                 handleLoad();
                 handleAdd(mockArtwork);
-                handleDelete(mockArtwork.id);
+                handleDelete(mockArtwork);
                 handleUpdate(mockArtwork);
                 return (
                     <>
                         <ul>
-                            <li>{artworks[0].title}</li>
+                            <li>{artworks[0][0].title}</li>
                             <li>{users[0].name}</li>
                             <li>{(artworkDetailed as Artwork).title}</li>
                         </ul>
@@ -78,7 +78,7 @@ describe('Given the context AppContext', () => {
                 </ArtworkContext.Provider>
             );
             const elementArt = screen.getByText(
-                initialContext.artworks[0].title
+                initialContext.artworks[0][0].title
             );
             const elementUser = screen.getByText(initialContext.users[0].name);
             const elementDetailedArt = screen.getByText(
