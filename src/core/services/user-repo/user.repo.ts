@@ -1,4 +1,3 @@
-// import { Repository } from '../../types/repo';
 import { User } from '../../../features/models/user.model';
 import { db } from '../../../config';
 import { ref, set } from '@firebase/database';
