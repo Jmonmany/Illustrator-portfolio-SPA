@@ -66,7 +66,7 @@ describe(`Given useArtworkss (custom hook)
                     </button>
                     <button
                         onClick={() =>
-                            reShuffleArtworks([mockArtwork1, mockArtwork2])
+                            reShuffleArtworks()
                         }
                     >
                         reShuffle
@@ -211,6 +211,13 @@ describe(`Given useArtworkss (custom hook)
         test('Then its function handleDelete should be used', async () => {
             userEvent.click(buttons[3]);
             expect(ArtworksRepo.prototype.delete).toHaveBeenCalled();
+            await waitFor(() => {
+                expect(spyConsole).toHaveBeenLastCalledWith('Testing errors');
+            });
+        });
+        test('Then its function handleShuffle should be used', async () => {
+            userEvent.click(buttons[4]);
+            expect(ArtworksRepo.prototype.load).toHaveBeenCalled();
             await waitFor(() => {
                 expect(spyConsole).toHaveBeenLastCalledWith('Testing errors');
             });

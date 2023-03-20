@@ -40,7 +40,6 @@ describe('Given the context AppContext', () => {
                     artworks,
                     artworkDetailed,
                     handleDetailed,
-                    reShuffleArtworks,
                     handleFile,
                     handleLoad,
                     handleAdd,
@@ -54,7 +53,6 @@ describe('Given the context AppContext', () => {
                 handleUpdateUser(mockUser);
                 handleDeleteCard(mockUser.uid);
                 handleDetailed(mockArtwork);
-                reShuffleArtworks([mockArtwork]);
                 handleFile(event, ARTWORK.id, ARTWORK.column);
                 handleLoad();
                 handleAdd(mockArtwork);

@@ -61,6 +61,7 @@ export function Item({
                     alt={item.title}
                     className="item__artwork"
                     onClick={handleClickDetails}
+                    id={item.column}
                 />
                 {getAdmin() ? (
                     <div>

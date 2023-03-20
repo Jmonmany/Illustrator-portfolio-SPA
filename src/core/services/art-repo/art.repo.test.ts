@@ -107,18 +107,20 @@ describe('Given a Artwork Repo', () => {
             expect(global.fetch).toHaveBeenCalled();
             expect(data).toBe(id);
         });
-        // test(`Then if there is NOT ID, we received a null`, async () => {
-        //     await expect(async () => {
-        //         await repo.delete(ARTWORK);
-        //     }).rejects.toThrowError();
-        //     expect(global.fetch).not.toHaveBeenCalled();
-        // });
+        test(`Then if there is NOT ID, we received a null`, async () => {
+            const localArt = ARTWORK;
+            localArt.id = '';
+            await expect(async () => {
+                await repo.delete(localArt);
+            }).rejects.toThrowError();
+            expect(global.fetch).not.toHaveBeenCalled();
+        });
         test(`Then if the ID is NOT VALID, we received a null`, async () => {
             global.fetch = jest.fn().mockResolvedValue({
                 ok: false,
             });
             await expect(async () => {
-                await repo.delete(ARTWORK);
+                await repo.delete(ARTWORK2);
             }).rejects.toThrowError();
             expect(global.fetch).toHaveBeenCalled();
         });

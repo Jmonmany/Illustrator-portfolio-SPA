@@ -35,7 +35,7 @@ export const artworksDeleteCreator = (
 });
 
 export const artworksReShuffleCreator = (
-    payload: Array<Artwork>
+    payload: Artwork[][]
 ): artworksAction => ({
     type: artworkActionTypes.reshuffle,
     payload,

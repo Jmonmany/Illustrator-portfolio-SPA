@@ -18,7 +18,6 @@ export class ArtworksRepo implements Repository<Artwork> {
                 .map((key) => ({ ...column[key], id: key }))
                 .filter((item: Artwork) => item.url !== undefined)
         );
-
         return artworksByColumns;
     }
     async create(payload: Partial<Artwork>): Promise<Artwork> {

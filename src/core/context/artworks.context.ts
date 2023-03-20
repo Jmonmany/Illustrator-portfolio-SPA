@@ -33,7 +33,7 @@ export const initialContext: ArtworkContextStructure & UserContextStructure = {
     artworkDetailed: {},
     artworks: [],
     handleDetailed: (artwork: Artwork) => {},
-    reShuffleArtworks: (list: Array<Artwork>) => {},
+    reShuffleArtworks: () => {},
     handleFile: async () => {},
     handleLoad: async () => {},
     handleAdd: async (artworks: Artworks) => {},
