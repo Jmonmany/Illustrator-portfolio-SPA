@@ -25,7 +25,7 @@ export function useUsers(): useUsersType {
     const initialState: Array<User> = [];
     const initialStatus = 'Starting' as Status;
     const [users, dispatchUsers] = useReducer(usersReducer, initialState);
-    const [admin, setAdmin] = useState(true);
+    const [admin, setAdmin] = useState(false);
     const [status, setStatus] = useState(initialStatus);
     const getUsers = () => users;
     const getStatus = () => status;
