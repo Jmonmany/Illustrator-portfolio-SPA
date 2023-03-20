@@ -61,9 +61,9 @@ describe('Given the reducer', () => {
     describe('When the action type is "artworks@reshuffle"', () => {
         test('Then it should return as state the loaded data', () => {
             state = [];
-            action = ac.artworksReShuffleCreator([mockArtwork1, mockArtwork2]);
+            action = ac.artworksReShuffleCreator(ARTWORKS);
             const result = artworksReducer(state, action);
-            expect(result).toEqual([mockArtwork1, mockArtwork2]);
+            expect(result).toEqual(ARTWORKS);
         });
     });
 

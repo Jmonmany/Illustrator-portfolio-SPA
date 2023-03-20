@@ -1,12 +1,12 @@
-// import { set, ref } from 'firebase/database';
+import { set, ref } from 'firebase/database';
 import { SyntheticEvent, useContext, useEffect, useRef } from 'react';
-// import { db } from '../../../config';
+import { db } from '../../../config';
 import { Artwork } from '../../../features/models/artwork.model';
 import { ArtworkContext } from '../../context/artworks.context';
 import { Item } from '../item/item';
 import './list.scss';
 export function List() {
-    const { artworks, handleLoad, handleAdd, getAdmin } =
+    const { artworks, handleLoad, handleAdd, reShuffleArtworks, getAdmin } =
         useContext(ArtworkContext);
     useEffect(() => {
         handleLoad();
@@ -32,19 +32,20 @@ export function List() {
         (dragOverItem.current as unknown) = position;
     };
     const drop = (e: SyntheticEvent) => {
-        // const copyListItems = [...artworks];
-        // const dragItemContent =
-        //     copyListItems[dragItem.current as unknown as number];
-        // copyListItems.splice(dragItem.current as unknown as number, 1);
-        // copyListItems.splice(
-        //     dragOverItem.current as unknown as number,
-        //     0,
-        //     dragItemContent
-        // );
-        // (dragItem.current as unknown as null) = null;
-        // (dragOverItem.current as unknown as null) = null;
-        // set(ref(db, 'admin/artworks/'), copyListItems);
-        // reShuffleArtworks(copyListItems);
+        const column = (e.target as HTMLImageElement).id;
+        const copyListItems = [...artworks[+column - 1]];
+        const dragItemContent =
+            copyListItems[dragItem.current as unknown as number];
+        copyListItems.splice(dragItem.current as unknown as number, 1);
+        copyListItems.splice(
+            dragOverItem.current as unknown as number,
+            0,
+            dragItemContent
+        );
+        (dragItem.current as unknown as null) = null;
+        (dragOverItem.current as unknown as null) = null;
+        set(ref(db, 'admin/artworks/column' + column), copyListItems);
+        reShuffleArtworks();
     };
     return (
         <section className="list">

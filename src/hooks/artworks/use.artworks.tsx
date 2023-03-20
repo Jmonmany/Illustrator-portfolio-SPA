@@ -18,7 +18,7 @@ import { detailedArtworkReducer } from '../../reducers/artworks/detailed.reducer
 export type useArtworksType = {
     artworkDetailed: Artwork | object;
     handleDetailed: (artwork: Artwork) => void;
-    reShuffleArtworks: (list: Array<Artwork>) => void;
+    reShuffleArtworks: () => void;
     handleFile: (ev: any, id: string, column: string) => void;
     getStatus: () => Status;
     getArtworks: () => Array<Array<Artwork>>;
@@ -47,7 +47,6 @@ export function useArtworks(): useArtworksType {
     const getArtworks = () => artworks;
     const getStatus = () => status;
     const handleFile = async (ev: SyntheticEvent, id: string, column: string) => {
-        console.log('MIERDA')
         ev.preventDefault();
         const element = ev.target as HTMLInputElement;
         if (!element.files) {
@@ -63,8 +62,13 @@ export function useArtworks(): useArtworksType {
         handleUpdate(artworkData);
     };
 
-    const reShuffleArtworks = (list: Array<Artwork>) => {
-        artworksDispatcher(ac.artworksReShuffleCreator(list));
+    const reShuffleArtworks = async function () {
+        try {
+            const newArtworks = await repo.load();
+            artworksDispatcher(ac.artworksReShuffleCreator(newArtworks));
+        } catch (error) {
+            handleError(error as Error);
+        }
     };
 
     const handleDetailed = (artwork: Artwork) => {
@@ -78,6 +82,7 @@ export function useArtworks(): useArtworksType {
             artworksDispatcher(ac.artworksLoadCreator(data));
             setStatus('Loaded');
         } catch (error) {
+            console.log('Soy: ', 'load');
             handleError(error as Error);
         }
     }, [repo]);

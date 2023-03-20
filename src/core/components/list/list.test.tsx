@@ -1,5 +1,5 @@
 /* eslint-disable testing-library/no-unnecessary-act */
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, fireEvent } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router';
 import { List } from './list';
 import {
@@ -49,33 +49,89 @@ describe('Given "List" component', () => {
             expect(altElements2).toBeInTheDocument();
             expect(altElements3).toBeInTheDocument();
         });
-        // test('should allow dragging and dropping artworks', async () => {
-        //     const altElements1 = screen.getByAltText('mockArt1');
-        //     const altElements2 = screen.getByAltText('mockArt2');
-        //     act(() => {
-        //         fireEvent.dragStart(altElements1, {
-        //             clientX: 0,
-        //             clientY: 0,
-        //         });
-        //     });
-        //     act(() => {
-        //         fireEvent.dragEnter(altElements2, {
-        //             clientX: 0,
-        //             clientY: 0,
-        //         });
-        //     });
-        //     act(() => {
-        //         fireEvent.dragEnd(altElements2, {
-        //             clientX: 0,
-        //             clientY: 0,
-        //         });
-        //     });
-
-        //     expect(reShuffleArtworks).toHaveBeenCalledWith([
-        //         ARTWORK2,
-        //         ARTWORK,
-        //         ARTWORK3,
-        //     ]);
-        // });
+        test('should allow dragging and dropping artworks', async () => {
+            const altElements1 = screen.getByAltText('mockArt1');
+            const altElements2 = screen.getByAltText('mockArt2');
+            const altElements3 = screen.getByAltText('mockArt3');
+            act(() => {
+                fireEvent.dragStart(altElements1, {
+                    clientX: 0,
+                    clientY: 0,
+                });
+            });
+            act(() => {
+                fireEvent.dragEnter(altElements2, {
+                    clientX: 0,
+                    clientY: 0,
+                });
+            });
+            act(() => {
+                fireEvent.dragEnd(altElements3, {
+                    clientX: 0,
+                    clientY: 0,
+                });
+            });
+            act(() => {
+                fireEvent.dragStart(altElements2, {
+                    clientX: 0,
+                    clientY: 0,
+                });
+            });
+            act(() => {
+                fireEvent.dragEnter(altElements3, {
+                    clientX: 0,
+                    clientY: 0,
+                });
+            });
+            act(() => {
+                fireEvent.dragEnd(altElements1, {
+                    clientX: 0,
+                    clientY: 0,
+                });
+            });
+            act(() => {
+                fireEvent.dragStart(altElements3, {
+                    clientX: 0,
+                    clientY: 0,
+                });
+            });
+            act(() => {
+                fireEvent.dragEnter(altElements1, {
+                    clientX: 0,
+                    clientY: 0,
+                });
+            });
+            act(() => {
+                fireEvent.dragEnd(altElements2, {
+                    clientX: 0,
+                    clientY: 0,
+                });
+            });
+            expect(reShuffleArtworks).toHaveBeenCalledTimes(3);
+        });
+    });
+    describe('When it is initially instantiated without admin', () => {
+        beforeEach(async () => {
+            mockContext = {
+                artworks: ARTWORKS,
+                getAdmin: () => false,
+                handleAdd,
+                handleLoad,
+                reShuffleArtworks,
+            } as unknown as ArtworkContextStructure & UserContextStructure;
+            await act(async () => {
+                render(
+                    <ArtworkContext.Provider value={mockContext}>
+                        <Router>
+                            <List></List>
+                        </Router>
+                    </ArtworkContext.Provider>
+                );
+            });
+        });
+        test(`Then component should be render the loading`, () => {
+            const lists = screen.getAllByRole('list');
+            expect(lists[0]).toBeInTheDocument();
+        });
     });
 });

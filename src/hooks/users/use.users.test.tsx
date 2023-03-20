@@ -70,7 +70,7 @@ describe(`Given useUsers (custom hook)
                             handleUser(await userCredentialsMock)
                         }
                     >
-                        DeleteCard
+                        handleUser
                     </button>
                     <h1>{getAdmin() ? 'true' : 'false'}</h1>
                     {getStatus() !== 'Loaded' ? (
@@ -162,6 +162,85 @@ describe(`Given useUsers (custom hook)
             await waitFor(() => {
                 expect(spyConsole).toHaveBeenLastCalledWith('Testing errors');
             });
+        });
+    });
+});
+describe(`Given useUsers (custom hook)
+            render with a virtual component for false admin`, () => {
+    let TestComponent: () => JSX.Element;
+    let buttons: Array<HTMLElement>;
+    beforeEach(async () => {
+        (login as jest.Mock).mockResolvedValue({
+            name: 'sample',
+            email: 'sample@gmail.com',
+            getIdToken: '12345',
+            user: {
+                displayName: '',
+                email: '',
+                getIdToken: jest.fn(),
+                uid: '',
+            },
+        });
+        const userCredentialsMock = login('sample', 'sample@gmail.com');
+        TestComponent = () => {
+            const {
+                getAdmin,
+                getStatus,
+                handleUser,
+                getUsers,
+                handleLoadUsers,
+                handleAddUser,
+                handleUpdateUser,
+                handleDeleteCard,
+            } = users.useUsers();
+            return (
+                <>
+                    <button onClick={handleLoadUsers}>Load</button>
+                    <button onClick={() => handleAddUser(mockAddUser)}>
+                        Add
+                    </button>
+                    <button onClick={() => handleUpdateUser(mockUpdateUser)}>
+                        Update
+                    </button>
+                    <button onClick={() => handleDeleteCard(mockUser2.uid)}>
+                        DeleteCard
+                    </button>
+                    <button
+                        onClick={async () =>
+                            handleUser(await userCredentialsMock)
+                        }
+                    >
+                        handleUser
+                    </button>
+                    <h1>{getAdmin() ? 'true' : 'false'}</h1>
+                    {getStatus() !== 'Loaded' ? (
+                        <p>Loading</p>
+                    ) : (
+                        <div>
+                            <p>Loaded</p>
+                            <ul>
+                                {getUsers().map((User: User) => (
+                                    <li key={User.uid}>{User.name}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </>
+            );
+        };
+        await act(async () => {
+            render(<TestComponent />);
+        });
+        buttons = screen.getAllByRole('button');
+    });
+    describe(`When the repo is working OK`, () => {
+        beforeEach(mockValidRepoResponse);
+        test('Then its function handleUser ADMIN should be used', async () => {
+            userEvent.click(buttons[4]);
+            const admin = await screen.findByRole('heading', {
+                name: 'false',
+            });
+            expect(admin).toBeInTheDocument();
         });
     });
 });

@@ -12,13 +12,9 @@ export function artworksReducer(
             const newArtwork = action.payload as Artwork;
             const columnToAddTo = newArtwork.column;
             return state.map((columnArtworks, i) => {
-                // console.log("COLUMNA: ",columnToAddTo)
-                // console.log('PAYLOAD ', action.payload);
-                if ((i+1) === + columnToAddTo) {
-                    // console.log('pepito')
+                if (i + 1 === +columnToAddTo) {
                     return [...columnArtworks, newArtwork];
                 } else {
-                    // console.log(columnArtworks);
                     return columnArtworks;
                 }
             });
@@ -26,7 +22,7 @@ export function artworksReducer(
             const updateArtwork = action.payload as Artwork;
             const columnToUpdate = updateArtwork.column;
             return state.map((columnArtworks, i) => {
-                if ((i+1) === +columnToUpdate) {
+                if (i + 1 === +columnToUpdate) {
                     return columnArtworks.map((item) =>
                         item.id === updateArtwork.id ? updateArtwork : item
                     );
@@ -40,8 +36,8 @@ export function artworksReducer(
                 columnArtworks.filter((item) => item.id !== finalId)
             );
         case artworkActionTypes.reshuffle:
-            const shuffledArtworks = action.payload as Array<Array<Artwork>>;
-            return [...shuffledArtworks];
+            const newOrder = action.payload as Array<Array<Artwork>>;
+            return [...newOrder];
         default:
             return [...state];
     }
