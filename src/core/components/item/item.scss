@@ -14,11 +14,10 @@
         div {
             max-width: 100%;
             margin-block: 0.5rem;
-            min-width: 25.5%;
+            min-width: 28%;
             display: flex;
             justify-content: space-between;
             position: absolute;
-            // translate: 0px -26rem;
             button {
                 @include btnTheme();
                 background-color: transparent;

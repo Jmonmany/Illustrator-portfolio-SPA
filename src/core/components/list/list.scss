@@ -6,20 +6,21 @@
     margin-inline: 3rem;
     .row {
         display: flex;
-        align-items: center;
         flex-direction: row;
-        justify-content: center;
+        align-items: flex-start;
         .column {
             display: flex;
             align-items: center;
             flex-direction: column;
             justify-content: center;
-            margin: 1rem;
+            margin-block: 1rem;
+            margin-inline: 0.5rem;
             ul {
                 padding: 0;
+                margin: 0;
                 display: flex;
                 align-items: center;
-                flex-direction: column;
+                flex-direction: column-reverse;
                 justify-content: center;
             }
         }
@@ -41,7 +42,7 @@
         align-items: center;
         .row {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
         }
         ul {
             display: flex;
