@@ -55,3 +55,15 @@
         align-items: center;
     }
 }
+@media (max-width: 950px) {
+    .details {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        img {
+            max-width: auto;
+            max-height: auto;
+            margin-block: 2rem;
+        }
+    }
+}
