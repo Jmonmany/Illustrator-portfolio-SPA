@@ -183,28 +183,9 @@ describe(`Given useUsers (custom hook)
         });
         const userCredentialsMock = login('sample', 'sample@gmail.com');
         TestComponent = () => {
-            const {
-                getAdmin,
-                getStatus,
-                handleUser,
-                getUsers,
-                handleLoadUsers,
-                handleAddUser,
-                handleUpdateUser,
-                handleDeleteCard,
-            } = users.useUsers();
+            const { getAdmin, handleUser, getUsers } = users.useUsers();
             return (
                 <>
-                    <button onClick={handleLoadUsers}>Load</button>
-                    <button onClick={() => handleAddUser(mockAddUser)}>
-                        Add
-                    </button>
-                    <button onClick={() => handleUpdateUser(mockUpdateUser)}>
-                        Update
-                    </button>
-                    <button onClick={() => handleDeleteCard(mockUser2.uid)}>
-                        DeleteCard
-                    </button>
                     <button
                         onClick={async () =>
                             handleUser(await userCredentialsMock)
@@ -213,18 +194,14 @@ describe(`Given useUsers (custom hook)
                         handleUser
                     </button>
                     <h1>{getAdmin() ? 'true' : 'false'}</h1>
-                    {getStatus() !== 'Loaded' ? (
-                        <p>Loading</p>
-                    ) : (
-                        <div>
-                            <p>Loaded</p>
-                            <ul>
-                                {getUsers().map((User: User) => (
-                                    <li key={User.uid}>{User.name}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
+
+                    <div>
+                        <ul>
+                            {getUsers().map((User: User) => (
+                                <li key={User.uid}>{User.name}</li>
+                            ))}
+                        </ul>
+                    </div>
                 </>
             );
         };
@@ -236,7 +213,7 @@ describe(`Given useUsers (custom hook)
     describe(`When the repo is working OK`, () => {
         beforeEach(mockValidRepoResponse);
         test('Then its function handleUser ADMIN should be used', async () => {
-            userEvent.click(buttons[4]);
+            userEvent.click(buttons[0]);
             const admin = await screen.findByRole('heading', {
                 name: 'false',
             });
