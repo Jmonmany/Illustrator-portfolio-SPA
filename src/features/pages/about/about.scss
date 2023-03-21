@@ -6,7 +6,7 @@
     align-self: center;
     display: flex;
     justify-content: center;
-    *{
+    * {
         font-size: 1.1rem;
     }
     a {
@@ -17,6 +17,12 @@
         margin-inline: 2rem;
         h3 {
             margin: 0;
+            margin-block-end: 1rem;
+            font-size: 1.2rem;
+        }
+        h4 {
+            margin-block: 1rem;
+            font-size: 1.2rem;
         }
         width: 40%;
     }
