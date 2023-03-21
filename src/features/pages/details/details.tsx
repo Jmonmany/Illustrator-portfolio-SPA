@@ -55,16 +55,14 @@ export default function Details() {
                             onInput={handleInput}
                             required
                         />
-                        <input
+                        <textarea
                             className="description"
-                            type="text"
                             name="description"
                             id="description"
                             placeholder="Description"
                             value={formData.description}
                             onInput={handleInput}
                         />
-
                         <input
                             type="text"
                             name="linkTag"
@@ -97,11 +95,8 @@ export default function Details() {
                     <section>
                         <h2>{(artworkDetailed as Artwork).title}</h2>
                         <p>{(artworkDetailed as Artwork).description}</p>
-                        <label>
-                            {(artworkDetailed as Artwork).linkTag}
-                        </label>
                         <a href={(artworkDetailed as Artwork).link}>
-                            {(artworkDetailed as Artwork).link}
+                            {(artworkDetailed as Artwork).linkTag}
                         </a>
                     </section>
                 </div>
