@@ -7,6 +7,7 @@ header {
     flex-direction: column;
     align-items: center;
     h1 {
+        text-align: center;
         font-weight: 500;
         font-size: 3.5rem;
         margin: 0;
@@ -28,6 +29,14 @@ header {
 }
 @media (max-width: 650px) {
     header {
+        h1 {
+            // margin-block-start: 3.5rem;
+            font-size: 2.5rem;
+        }
+        h2 {
+            font-size: 1rem;
+            margin-block-end: 0;
+        }
         button {
             align-self: center;
             margin-block-start: 1.5rem;

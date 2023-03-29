@@ -38,3 +38,33 @@
 .item:hover img {
     transform: scale(1.1);
 }
+@media (max-width: 650px) {
+    .item {
+        div {
+            img {
+                max-width: 100%;
+                min-width: 23rem;
+                height: auto;
+            }
+            div {
+                max-width: 100%;
+                margin-block: 0.5rem;
+                min-width: 28%;
+                display: flex;
+                justify-content: space-between;
+                position: absolute;
+                button {
+                    @include btnTheme();
+                    background-color: transparent;
+                    padding-inline: 1rem;
+                }
+                input {
+                    display: none;
+                }
+                img {
+                    height: 2rem;
+                }
+            }
+        }
+    }
+}
