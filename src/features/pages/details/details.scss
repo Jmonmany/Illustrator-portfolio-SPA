@@ -115,6 +115,7 @@
 }
 @media (max-width: 550px) {
     .details {
+        max-width: 100vw;
         img {
             max-width: 28rem;
         }
@@ -130,35 +131,14 @@
                 width: 100%;
                 text-align: center;
             }
-            a {
-                color: rgb(61, 152, 255);
-                margin-block-start: 1.5rem;
-                font-weight: bold;
-            }
         }
-        a {
-            text-decoration: none;
-        }
-        form {
-            input {
-                margin-block: 1rem;
-                width: 20rem;
-            }
-            margin-block-start: 5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            .description {
-                padding: 0.1rem;
-                outline: none;
-                height: 5rem;
-                min-width: 20rem;
-                line-height: 16px;
-            }
-            button {
-                @include btnTheme();
-                width: 15rem;
-            }
+    }
+}
+@media (max-width: 380px) {
+    .details {
+        max-width: 100vw;
+        img {
+            max-width: 22rem;
         }
     }
 }
