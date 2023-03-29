@@ -26,7 +26,7 @@
             font-size: 1.4rem;
         }
         p {
-            width: 55%;
+            width: 75%;
             text-align: center;
         }
         a {
@@ -69,6 +69,7 @@
 }
 @media (max-width: 800px) {
     .details {
+        margin-block-start: 1rem;
         img {
             max-width: 35rem;
         }
@@ -81,7 +82,7 @@
                 font-size: 1.2rem;
             }
             p {
-                width: 55%;
+                width: 65%;
                 text-align: center;
             }
             a {
@@ -128,7 +129,7 @@
                 font-size: 1rem;
             }
             p {
-                width: 100%;
+                width: 90vw;
                 text-align: center;
             }
         }
@@ -138,7 +139,20 @@
     .details {
         max-width: 100vw;
         img {
+            margin-block-start: 1rem;
             max-width: 22rem;
+        }
+        section {
+            * {
+                font-size: 80%;
+            }
+            h2 {
+                font-size: 1rem;
+            }
+            p {
+                width: 90vw;
+                text-align: center;
+            }
         }
     }
 }
