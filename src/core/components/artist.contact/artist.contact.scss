@@ -22,7 +22,7 @@
         flex-direction: column;
         div {
             margin-block: 1rem;
-        } 
+        }
         input {
             margin: 0.5rem;
             border: none;
@@ -45,6 +45,16 @@
         }
         .div__btn {
             align-self: center;
+        }
+    }
+}
+@media (max-width: 500px) {
+    .artist-contact {
+        h2 {
+            font-size: 1.6rem;
+        }
+        p {
+            font-size: 1rem;
         }
     }
 }

@@ -72,10 +72,10 @@
             left: 0;
             top: 0;
             li {
-                margin: 3rem;
+                margin-block-start: 4rem;
                 a {
                     @include linkDeco();
-                    font-size: 2.5rem;
+                    font-size: 2rem;
                 }
             }
         }
