@@ -6,9 +6,10 @@
     margin-inline: 3rem;
     .row {
         display: flex;
-        flex-direction: row;
         align-items: flex-start;
+        justify-content: space-evenly;
         .column {
+            width: 100%;
             display: flex;
             align-items: center;
             flex-direction: column;
