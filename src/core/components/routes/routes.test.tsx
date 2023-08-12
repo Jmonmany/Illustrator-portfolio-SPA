@@ -14,18 +14,22 @@ jest.mock('../../../features/pages/work/work', () => {
     return () => <p>{mockPageTitles[0]}</p>;
 });
 
-jest.mock('../../../features/pages/about/about', () => {
+jest.mock('../../../features/pages/animation/animation', () => {
     return () => <p>{mockPageTitles[1]}</p>;
 });
 
-jest.mock('../../../features/pages/contact/contact', () => {
+jest.mock('../../../features/pages/about/about', () => {
     return () => <p>{mockPageTitles[2]}</p>;
 });
-jest.mock('../../../features/pages/details/details', () => {
+
+jest.mock('../../../features/pages/contact/contact', () => {
     return () => <p>{mockPageTitles[3]}</p>;
 });
-jest.mock('../../../features/pages/login/login', () => {
+jest.mock('../../../features/pages/details/details', () => {
     return () => <p>{mockPageTitles[4]}</p>;
+});
+jest.mock('../../../features/pages/login/login', () => {
+    return () => <p>{mockPageTitles[5]}</p>;
 });
 
 describe('Given AppRoutes Lazy component', () => {
@@ -49,7 +53,7 @@ describe('Given AppRoutes Lazy component', () => {
         });
     });
     describe(`When we render the component 
-                And the lazy route is About`, () => {
+                And the lazy route is Animation`, () => {
         beforeEach(async () => {
             await act(async () => {
                 render(
@@ -59,12 +63,12 @@ describe('Given AppRoutes Lazy component', () => {
                 );
             });
         });
-        test('Then it should display the AboutPage', () => {
+        test('Then it should display the AnimationPage', () => {
             testLazyRoute(1);
         });
     });
     describe(`When we render the component 
-                And the lazy route is Contact`, () => {
+                And the lazy route is About`, () => {
         beforeEach(async () => {
             await act(async () => {
                 render(
@@ -74,12 +78,12 @@ describe('Given AppRoutes Lazy component', () => {
                 );
             });
         });
-        test('Then it should display the ContactPage', () => {
+        test('Then it should display the AboutPage', () => {
             testLazyRoute(2);
         });
     });
     describe(`When we render the component 
-                And the lazy route is Detail`, () => {
+                And the lazy route is Contact`, () => {
         beforeEach(async () => {
             await act(async () => {
                 render(
@@ -89,12 +93,12 @@ describe('Given AppRoutes Lazy component', () => {
                 );
             });
         });
-        test('Then it should display the DetailPage', () => {
+        test('Then it should display the ContactPage', () => {
             testLazyRoute(3);
         });
     });
     describe(`When we render the component 
-                And the lazy route is Login`, () => {
+                And the lazy route is Detail`, () => {
         beforeEach(async () => {
             await act(async () => {
                 render(
@@ -104,8 +108,23 @@ describe('Given AppRoutes Lazy component', () => {
                 );
             });
         });
-        test('Then it should display the Login', () => {
+        test('Then it should display the DetailPage', () => {
             testLazyRoute(4);
+        });
+    });
+    describe(`When we render the component 
+                And the lazy route is Login`, () => {
+        beforeEach(async () => {
+            await act(async () => {
+                render(
+                    <Router initialEntries={lazyPaths} initialIndex={5}>
+                        <AppLazyRoutes items={items} />
+                    </Router>
+                );
+            });
+        });
+        test('Then it should display the Login', () => {
+            testLazyRoute(5);
         });
     });
 });

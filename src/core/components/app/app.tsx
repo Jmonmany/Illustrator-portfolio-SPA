@@ -4,6 +4,7 @@ import { AppLazyRoutes } from '../routes/routes';
 export function App() {
     const items: MenuItems = [
         { path: '/work', label: 'WORK' },
+        { path: '/animation', label: 'ANIMATION' },
         { path: '/about', label: 'ABOUT' },
         { path: '/contact', label: 'CONTACT' },
     ];
